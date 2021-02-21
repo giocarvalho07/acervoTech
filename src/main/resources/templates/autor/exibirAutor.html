@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width"/>
+	<title> e-Livraria </title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
+</head>
+<body>
+
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  			<a class="navbar-brand" href="/home"> Acervo digital </a>
+
+	  		<div class="collapse navbar-collapse" id="navbarNav">
+	    		<ul class="navbar-nav">
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="/livro">Cadastrar livros</a>
+	      			</li>
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="/exibir-livro">Exibir livros</a>
+	      			</li>
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="/autor">Cadastrar autores</a>
+	      			</li>
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="/exibir-autor">Exibir autores</a>
+	      			</li>
+	      			
+					<li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          <span class="text-right text-uppercase" th:text="${session.usuarioLogado.user}"></span>
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					        <form th:action="@{/logout}"method="post" class="text-center">
+							<button type="submit" class="btn btn-warning btn-sm">Sair</button>
+							</form>
+				        </div>
+			      	</li>	      				
+	    		</ul>
+	  		</div>
+		</nav>
+
+	
+	<div class="text-center mt-5" >
+		<h1> Vizualize nossos livros </h1>
+	</div>
+		
+	<div class="container mt-5">
+		<table class="table">
+			<thead>
+				<tr>
+					<th> Código </th>
+					<th> Nome</th>
+					<th> Data de nascimento </th>
+					<th> Categoria </th>
+					<th> Editar </th>
+					<th> Deletar </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="autor: ${autores}">
+					<td><span th:text="${autor.id}" class="hidden"></span></td>
+					<td><span th:text="${autor.nome}"></span></td>
+					<td><span th:text="${autor.data}"></span></td>
+					<td><span th:text="${autor.tipoDeLiteratura}"></span></td>
+					
+					<td> <a th:href="@{'/editar-autor?id=' + ${autor.id}}"   class="btn btn-primary" >Editar</a></td>
+					<td><a th:href="${(#mvc.url('AC#deleteDeletarAutor').arg(0, autor.id)).build()}"  class="btn btn-warning"> Deletar </a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+	
+	<br>
+	<br>
+	
+	<div class="container mt-5">
+		<div class="card" >
+			<div class="card-body" >
+				<div class="form-group text-center">
+	    			<h5> AcervoTech </h5>
+	    			<p> Agora cadastre seus livros </p>
+	  			</div>
+
+				<div class="text-center">	
+
+					<a href="/livro" type="reset" class="btn btn-info mt-2"> Cadastrar livros </a>
+
+				</div>					
+			</div>
+		</div>
+	</div>
+	
+	<div class="container mt-5"></div>	
+	
+	
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

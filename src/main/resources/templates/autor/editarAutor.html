@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+	<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width"/>
+	<title> e-Livraria </title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  			<a class="navbar-brand" href="/home"> Acervo digital </a>
+
+	  		<div class="collapse navbar-collapse" id="navbarNav">
+	    		<ul class="navbar-nav">
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="/livro">Cadastrar livros</a>
+	      			</li>
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="/exibir-livro">Exibir livros</a>
+	      			</li>
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="/autor">Cadastrar autores</a>
+	      			</li>
+	      			<li class="nav-item">
+	        			<a class="nav-link" href="/exibir-autor">Exibir autores</a>
+	      			</li>
+	      			
+					<li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          <span class="text-right text-uppercase" th:text="${session.usuarioLogado.user}"></span>
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					        <form th:action="@{/logout}"method="post" class="text-center">
+							<button type="submit" class="btn btn-warning btn-sm">Sair</button>
+							</form>
+				        </div>
+			      	</li>	      				
+	    		</ul>
+	  		</div>
+		</nav>
+	
+	<div class="text-center mt-5" >
+		<h1> Cadastre os autores </h1>
+	</div>
+	
+	<div class="container mt-3">
+		<div class="card" >
+			<div class="card-body" >
+				<form th:action="@{/salvar-autor}" th:object="${autor}" method="post">
+	  				
+	  				
+					<div class="form-group">
+						<label for="id" class="text-center"> id </label>
+						<span class="text-primary" th:text="${autor.id}"></span>
+						<input type="hidden" th:field="*{id}" placeholder="digite o nome do Autor" class="form-control" />
+		  			</div>	   
+		  			
+		  			<div class="form-group">
+						<label>Nome</label> 
+						<input class="form-control" type="text" placeholder="Digite o nome" th:field="*{nome}"  required/>
+		  			</div>	  	  				
+	  				
+	  				
+	  				<div class="form-group">
+	    				<label for="data" class="text-center"> Data de Compra </label>
+	    				<input type="date" th:field="*{data}" placeholder="digite a data de nascimento do Autor" 
+	    						class="form-control" />
+	  				</div>
+	  				
+	  				<div class="form-group">
+	    				<label for="tipoDeLiteratura" class="text-center"> Categoria de literatura  </label>
+	    				<input type="text" th:field="*{tipoDeLiteratura}" placeholder="digite a categoria de literatura do Autor" class="form-control" />
+	  				</div>
+	  				
+
+					<div class="text-center">	
+						<a href="/home" type="reset" class="btn btn-secondary"> Voltar</a>
+						<button type="submit" class="btn btn-primary"> Salvar </button>	
+						<a href="/exibir-autor" class="btn btn-info"> Exibir </a>
+					</div>
+					 
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
+
+</body>
+</html>
